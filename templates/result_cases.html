@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+{% if done %}
+<H1>{{ name }}, оценка:
+
+    <button type="button" class="btn btn-primary btn-lg disabled"><b>{{ score }}</b></button></H1>
+
+{% endif %}
+<div class="container">
+<div class="row">
+
+
+    <div class="alert alert-secondary" role="alert">
+        
+        <div class="alert alert-light" role="alert">Задание {{ tasks.0.id }}. Файл размером {{ tasks.0.size }} Кбайт
+                    передаётся через некоторое соединение со скоростью {{ tasks.0.to_unit }} бит в секунду.
+                Определите размер файла (в Кбайт), который можно передать за то же время через другое соединение со скоростью
+                    {{ tasks.0.from_unit }} бит в секунду.
+                    В ответе укажите одно целое число: размер файла в Кбайт. Единицы измерения писать не нужно.
+
+        </div>
+        {%- if tasks.0.correct %}
+
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.0.answer }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.0.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.0.answer }}</p>
+        {%- endif %}
+
+        <div class="alert alert-light" role="alert">Задание {{ tasks.1.id }}. Файл размером {{ tasks.1.size }} Кбайт
+                    передаётся через некоторое соединение со скоростью {{ tasks.1.to_unit }} бит в секунду.
+                Определите размер файла (в Кбайт), который можно передать за то же время через другое соединение со скоростью
+                    {{ tasks.1.from_unit }} бит в секунду.
+                    В ответе укажите одно целое число: размер файла в Кбайт. Единицы измерения писать не нужно.
+
+        </div>
+        {%- if tasks.1.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.1.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.1.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.1.answer }}</p>
+        {%- endif %}
+        <div class="alert alert-light" role="alert">Задание {{ tasks.2.id }}. Файл размером {{ tasks.2.size }} Кбайт
+                    передаётся через некоторое соединение со скоростью {{ tasks.2.to_unit }} бит в секунду.
+                Определите размер файла (в Кбайт), который можно передать за то же время через другое соединение со скоростью
+                    {{ tasks.2.from_unit }} бит в секунду.
+                    В ответе укажите одно целое число: размер файла в Кбайт. Единицы измерения писать не нужно.
+
+        </div>
+        {%- if tasks.2.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.2.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.2.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.2.answer }}</p>
+        {%- endif %}
+        <div class="alert alert-light" role="alert">Задание {{ tasks.3.id }}. Файл размером {{ tasks.3.size }} Кбайт
+                    передаётся через некоторое соединение со скоростью {{ tasks.3.to_unit }} бит в секунду.
+                Определите размер файла (в Кбайт), который можно передать за то же время через другое соединение со скоростью
+                    {{ tasks.3.from_unit }} бит в секунду.
+                    В ответе укажите одно целое число: размер файла в Кбайт. Единицы измерения писать не нужно.
+
+        </div>
+        {%- if tasks.3.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.3.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.3.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.3.answer }}</p>
+        {%- endif %}
+        <div class="alert alert-light" role="alert">Задание {{ tasks.4.id }}. Файл размером {{ tasks.4.size }} Кбайт
+                    передаётся через некоторое соединение со скоростью {{ tasks.4.to_unit }} бит в секунду.
+                Определите размер файла (в Кбайт), который можно передать за то же время через другое соединение со скоростью
+                    {{ tasks.4.from_unit }} бит в секунду.
+                    В ответе укажите одно целое число: размер файла в Кбайт. Единицы измерения писать не нужно.
+
+        </div>
+        {%- if tasks.4.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.4.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.4.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.4.answer }}</p>
+        {%- endif %}
+        <a class="btn btn-success"
+           href="/cases">Ещё раз</a>
+    </div>
+
+</div>
+</div>
+{% endif %}
+{% endblock %}

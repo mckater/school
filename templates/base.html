@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/x-icon" href="https://icons.getbootstrap.com/assets/img/favicons/favicon.ico">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-light bg-light">
+        <h1>609</h1>
+
+        {% if current_user.is_authenticated %}
+
+        <a class="navbar-brand"><h2>РМ: {{ current_user.id }}</h2> </a>
+
+        <a class="btn btn-outline-primary " href="/logout">logout</a>
+        {% else %}
+        <p>
+            <a class="btn btn-success" href="/login">login</a>
+        </p>
+        {% endif %}
+        <a class="btn btn-outline-secondary" href="/main" >
+            Биты Байты</a>
+        <a class="btn btn-outline-success" href="/cases">
+            Задачи</a>
+        <a class="btn btn-outline-warning disabled" href="https://dnevnik.mos.ru/" target="_blank">coming soon</a>
+
+
+        <a class="btn btn-primary disabled" href="#" target="_blank">disabled</a>
+        <a class="btn btn-success disabled"
+           href="#"
+           target="_blank">disabled</a>
+
+    </nav>
+    <div class="col-1 col-lg-2 mb-3">
+
+
+
+    </div>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="container">
+
+    {% block content %}{% endblock %}
+</main>
+</body>
+
+</head>
+<body>
+
+</body>
+</html>

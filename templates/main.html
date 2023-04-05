@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+<h1>Единицы измерения информации</h1>
+<p>Перевод единиц измерения:</p>
+
+
+<div class="container">
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="alert alert-secondary" role="alert">
+            <form method="POST">
+                {{ form.csrf_token() }}
+                <div class=".col-3 .col-md-2">Задание {{ tasks.0.id }}. Переведите {{ tasks.0.size }} {{ tasks.0.from_unit }} в {{ tasks.0.to_unit }}ы</div>
+                {{ form.answer(class='form-control') }}
+            <div class=".col-3 .col-md-2">Задание {{ tasks.1.id }}. Переведите {{ tasks.1.size }} {{ tasks.1.from_unit }} в {{ tasks.1.to_unit }}ы</div>
+                {{ form.answer1(class='form-control') }}
+                <div class=".col-3 .col-md-2">Задание {{ tasks.2.id }}. Переведите {{ tasks.2.size }} {{ tasks.2.from_unit }} в {{ tasks.2.to_unit }}ы</div>
+            {{ form.answer2(class='form-control') }}
+                <div class=".col-3 .col-md-2">Задание {{ tasks.3.id }}. Переведите {{ tasks.3.size }} {{ tasks.3.from_unit }} в {{ tasks.3.to_unit }}ы</div>
+            {{ form.answer3(class='form-control') }}
+                <div class=".col-3 .col-md-2">Задание {{ tasks.4.id }}. Переведите {{ tasks.4.size }} {{ tasks.4.from_unit }} в {{ tasks.4.to_unit }}ы</div>
+            {{ form.answer4(class='form-control') }}
+            {{ form.name(class='form-control', placeholder='Фамилия') }}
+                {{ form.submit(type="submit", class='btn btn-primary btn-block') }}
+            </form>
+        </div>
+    </div>
+<!--*****-->
+</div></div>
+{% else %}
+Требуется авторизация.
+{% endif %}
+{% endblock %}
