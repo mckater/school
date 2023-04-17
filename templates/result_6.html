@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated %}
+{% if done %}
+<H1>{{ name }}, оценка:
+
+    <button type="button" class="btn btn-primary btn-lg disabled"><b>{{ score }}</b></button></H1>
+
+{% endif %}
+<div class="container">
+<div class="row">
+
+
+    <div class="alert alert-secondary" role="alert">
+        
+        <div class=".col-3 .col-md-2">Задание {{ tasks.0.id }}. <br>
+                    s = {{ tasks.0.s }}<br>
+                    n = {{ tasks.0.n }}<br>
+                    while s > 0:<br>
+                        <div class="col px-md-4">s = s - {{ tasks.0.minus }}<br>
+                            n = n * {{ tasks.0.multi }}<br></div>
+                    print(n)<br>
+                </div>
+        {%- if tasks.0.correct %}
+
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.0.answer }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.0.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.0.answer }}</p>
+        {%- endif %}
+
+        <div class=".col-3 .col-md-2">Задание {{ tasks.1.id }}. <br>
+                    s = {{ tasks.1.s }}<br>
+                    n = {{ tasks.1.n }}<br>
+                    while s > 0:<br>
+                        <div class="col px-md-4">s = s - {{ tasks.1.minus }}<br>
+                            n = n * {{ tasks.1.multi }}<br></div>
+                    print(n)<br>
+                </div>
+        {%- if tasks.1.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.1.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.1.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.1.answer }}</p>
+        {%- endif %}
+        <div class=".col-3 .col-md-2">Задание {{ tasks.2.id }}. <br>
+                    s = {{ tasks.2.s }}<br>
+                    n = {{ tasks.2.n }}<br>
+                    while s > 0:<br>
+                        <div class="col px-md-4">s = s - {{ tasks.2.minus }}<br>
+                            n = n * {{ tasks.2.multi }}<br></div>
+                    print(n)<br>
+                </div>
+        {%- if tasks.2.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.2.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.2.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.2.answer }}</p>
+        {%- endif %}
+        <div class=".col-3 .col-md-2">Задание {{ tasks.3.id }}. <br>
+                    s = {{ tasks.3.s }}<br>
+                    n = {{ tasks.3.n }}<br>
+                    while s > 0:<br>
+                        <div class="col px-md-4">s = s - {{ tasks.3.minus }}<br>
+                            n = n * {{ tasks.3.multi }}<br></div>
+                    print(n)<br>
+                </div>
+        {%- if tasks.3.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.3.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.3.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.3.answer }}</p>
+        {%- endif %}
+        <div class=".col-3 .col-md-2">Задание {{ tasks.4.id }}. <br>
+                    s = {{ tasks.4.s }}<br>
+                    n = {{ tasks.4.n }}<br>
+                    while s > 0:<br>
+                        <div class="col px-md-4">s = s - {{ tasks.4.minus }}<br>
+                            n = n * {{ tasks.4.multi }}<br></div>
+                    print(n)<br>
+                </div>
+        {%- if tasks.4.correct %}
+        <div class="alert alert-primary" role="alert">
+            Дан ответ {{ tasks.4.result }}, это верно!!
+        </div>
+        {% else %}
+        <p class="incorrect">Дан ответ {{ tasks.4.result }}, это  <b>неверно</b>. Верный ответ: {{ tasks.4.answer }}</p>
+        {%- endif %}
+        <a class="btn btn-success"
+           href="/main">Ещё раз</a>
+    </div>
+
+</div>
+</div>
+{% endif %}
+{% endblock %}

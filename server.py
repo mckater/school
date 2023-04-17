@@ -4,6 +4,8 @@ from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
 import random
 import logging
+import csv
+from datetime import datetime
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from data import db_session
@@ -83,6 +85,28 @@ class Process:
         self.data[current_user_id] = tasks
         return
 
+    def task_6(self, current_user_id):
+        tasks = list()
+        for i in range(5):
+            cycle = random.randint(3, 5)
+            answer = 1
+            minus, multi = random.randint(5, 10), random.randint(2, 5)
+            ost = random.randint(1, minus-1)
+            s = ost + cycle * minus
+            answer = multi ** (cycle + 1)
+            tasks.append({
+                'id': i + 1,
+                'n': 1,
+                'minus': minus,
+                's': s,
+                'multi': multi,
+                'answer': str(answer),
+                'correct': False,
+                'result': ''
+            })
+        self.data[current_user_id] = tasks
+        return
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -139,7 +163,6 @@ class TaskForm(FlaskForm):
 
 @app.route('/main', methods=['GET', 'POST'])
 def main():
-    # print(current_user)
     form = TaskForm()
     ex.name = ''
     ex.score = 0
@@ -176,6 +199,9 @@ def main():
                     task['correct'] = True
                     ex.score += 1
             ex.done = True
+            with open(r"db/log.csv", "a+", encoding='utf-8') as file:
+                file_writer = csv.writer(file, delimiter=",", lineterminator="\r")
+                file_writer.writerow([datetime.now(), current_user.id, ex.name, ex.score, 'биты_байты'])
             return render_template('result.html', name=ex.name, tasks=ex.data[current_user.id], score=ex.score, done=ex.done)
             # session.clear()  # очистка списка выполненных заданий в сеансе
         except Exception:
@@ -223,8 +249,60 @@ def cases():
                     task['correct'] = True
                     ex.score += 1
             ex.done = True
+            with open(r"db/log.csv", "a+", encoding='utf-8') as file:
+                file_writer = csv.writer(file, delimiter=",", lineterminator="\r")
+                file_writer.writerow([datetime.now(), current_user.id, ex.name, ex.score, 'задачи'])
             return render_template('result_cases.html', name=ex.name, tasks=ex.data[current_user.id],
                                    score=ex.score, done=ex.done)
+            # session.clear()  # очистка списка выполненных заданий в сеансе
+        except Exception:
+            logging.exception('')
+            return ''
+
+
+@app.route('/task_6', methods=['GET', 'POST'])
+def task_6():
+    form = TaskForm()
+    ex.name = ''
+    ex.score = 0
+    ex.done = False
+    if request.method == 'GET':  # обработка GET запроса
+        ex.task_6(current_user.id)
+        if not session.get('task_results'):
+            session['task_results'] = []
+        return render_template('task_6.html', form=form, tasks=ex.data[current_user.id],
+                               score=ex.score, done=ex.done)
+
+    if request.method == 'POST' and form.validate_on_submit():
+        task_results_ = session['task_results']
+        try:
+            answer_data = form.answer.data.strip().replace(' ', '')
+            task_results_.append(answer_data)
+            ex.data[current_user.id][0]['result'] = answer_data
+            answer_data = form.answer1.data.strip().replace(' ', '')
+            task_results_.append(answer_data)
+            ex.data[current_user.id][1]['result'] = answer_data
+            answer_data = form.answer2.data.strip().replace(' ', '')
+            task_results_.append(answer_data)
+            ex.data[current_user.id][2]['result'] = answer_data
+            answer_data = form.answer3.data.strip().replace(' ', '')
+            task_results_.append(answer_data)
+            ex.data[current_user.id][3]['result'] = answer_data
+            answer_data = form.answer4.data.strip().replace(' ', '')
+            task_results_.append(answer_data)
+            ex.data[current_user.id][4]['result'] = answer_data
+
+            ex.name = form.name.data.strip()
+            for task in ex.data[current_user.id]:
+                if task['answer'] == task_results_[task['id'] - 1]:
+                    task['correct'] = True
+                    ex.score += 1
+            ex.done = True
+            with open(r"db/log.csv", "a+", encoding='utf-8') as file:
+                file_writer = csv.writer(file, delimiter=",", lineterminator="\r")
+                file_writer.writerow([datetime.now(), current_user.id, ex.name, ex.score, 'while'])
+            return render_template('result_6.html', name=ex.name, tasks=ex.data[current_user.id], score=ex.score,
+                                   done=ex.done)
             # session.clear()  # очистка списка выполненных заданий в сеансе
         except Exception:
             logging.exception('')
